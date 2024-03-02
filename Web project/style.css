@@ -1,0 +1,629 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0%;
+    color: #888;
+}
+
+.backGroundImg {
+    position: fixed;
+    top: 10vh;
+    left: 20%;
+    width: auto;
+    height: 100%;
+    margin-top: 2%;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: -3;
+    opacity: 0.5;
+}
+
+.Spacetop {
+    height: 8vh;
+    width: 100%;
+    top: 0;
+    background-color: #ffffff6b;
+    z-index: -2;
+}
+
+/* Full-width input fields */
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    outline-color: #b43ce0;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #b43ce0;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.container {
+    padding: 16px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.modal form {
+    position: relative;
+}
+
+.modal form input[type="text"],
+input[type="password"] {
+    position: relative;
+    background: transparent;
+}
+
+.container label[class="logLab"] {
+    float: inline-start;
+    margin-top: -2.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+input:focus+label,
+input:not(:placeholder-shown)+label {
+    color: #b43ce0;
+    transform: translate(1em, -2em);
+    background-color: #fff;
+    font-size: 12px;
+}
+
+.modal form img {
+    position: relative;
+    height: auto;
+    width: 100%;
+    align-self: center;
+}
+
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 2;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: 0% auto 1% auto;
+    /* 0% from the top, 1% from the bottom and centered */
+    border: 3px solid #f535f1;
+    width: 40%;
+    /* Could be more or less, depending on screen size */
+    max-width: 410px;
+    min-width: 280px;
+}
+
+
+/* The Close Button (x) 
+.close {
+position: absolute;
+right: 25px;
+top: 0;
+color: #eb0909;
+font-size: 35px;
+font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+color: red;
+cursor: pointer;
+}*/
+
+#log{
+    float:right;
+    margin-right:2%;
+    margin-bottom: 0;
+    margin-top: -15px;
+}
+.logCont{
+    width: 20%;
+    display: block;
+    position: fixed;
+    height: 70%;
+    background-color: white;
+    top: 15vh;
+    right: 0;
+    z-index: 2;
+}
+#UserIcon{
+    height: 50px;
+    width: auto;
+    vertical-align: middle;
+    
+}
+
+
+#main_head {
+    text-align: center;
+    color: #fefefe;
+}
+
+#main_heading_text {
+    margin-top: 0.2%;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+}
+
+#main_heading_abr {
+    margin-top: 0%;
+    margin-bottom: 0%;
+    padding-top: 0%;
+}
+
+.navOut {
+    background-color: #5f0282;
+}
+
+.navbar {
+    overflow: auto;
+}
+
+.navbar li {
+    float: left;
+    list-style: none;
+    margin: 12px 8px;
+    margin-top: 0%;
+    margin-left: 5%;
+
+}
+
+.navbar li a {
+    padding: 4px 5px;
+    text-decoration: none;
+    color: #fefefe;
+    border-radius: 20px;
+}
+
+.navbar li a:hover {
+    color: #d171f7;
+}
+.headM {
+    background-color: #5f0282;
+    overflow: auto;
+    width: 100%;
+    z-index: 1;
+    margin-top: 0%;
+    padding-top: 0%;
+    position: fixed;
+    top: 0%;
+    border-bottom: 4px solid #f535f1;
+    border-bottom-left-radius: 25em;
+
+}
+
+.navbar ul {
+    padding: 0%;
+}
+
+.modal form button {
+    border-radius: 5px;
+}
+
+.marImg {
+    max-height: 60vh;
+    max-width: 80vw;
+    background-color: #f2f79780;
+    margin: auto;
+    margin-top: 120px;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+.marImg div {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    max-width: 50%;
+    list-style: none;
+    overflow: hidden;
+}
+
+.marImg img {
+    width: 100%;
+    max-width: 100%;
+    height: 60vh;
+    margin: auto;
+    zoom: initial;
+    padding: 0%;
+}
+
+Section {
+    position: relative;
+    top: 10px;
+    width: 75%;
+    margin: auto;
+    border: #6f0ecf 3.3px solid;
+    border-radius: 10px;
+}
+
+
+
+/* Home Section styles  */
+#HomeSection {
+    position: relative;
+    top: 10px;
+    width: 75%;
+    margin: auto;
+    border: none;
+    outline: none;
+}
+
+.detailsHome {
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.detailsHome h3 {
+    font-size: 3em;
+    color: #c800fff5;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255);
+    font-weight: bolder;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.detailsHome P {
+    font-weight: 600;
+    font-family: cursive;
+    font-size: 1.7em;
+    color: #2f143bf5;
+    font-weight: lighter;
+    text-align: justify;
+}
+
+.detailsHome span {
+    font-size: 1.52em;
+    color: #039dd0f5;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+
+
+/* About Section styles  */
+#AboutSection {
+    position: relative;
+    margin-top: 10em;
+    text-align: justify;
+    outline: none;
+    width: 99%;
+}
+
+#AboutSection h1 {
+    margin: 8px 20px;
+    font-size: 4em;
+    color: #c800fff5;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255);
+    font-weight: bolder;
+    margin-top: 0%;
+}
+
+#Abt1,
+#Abt3 {
+    background-color: rgba(45, 36, 171, 0.689);
+    border-radius: 0 50px 50px 0;
+    border: #b43ce0 10px solid;
+    border-right: #9606adf5 4px solid;
+    border-left: none;
+    outline: none;
+    margin-right: 20%;
+    padding-left: 2%;
+    padding-right: 6%;
+    padding-bottom: 1%;
+    margin-bottom: 5%;
+    position: relative;
+}
+
+#Abt2,
+#Abt4 {
+    align-items: end;
+    background-color: rgba(149, 25, 25, 0.662);
+    border-radius: 50px 0 0 50px;
+    border: #b43ce0 10px solid;
+    border-left: #9606adf5 4px solid;
+    border-right: none;
+    outline: none;
+    margin-left: 20%;
+    padding-left: 6%;
+    padding-right: 2%;
+    padding-bottom: 1%;
+    margin-bottom: 3%;
+    position: relative;
+    align-items: end;
+}
+
+#AboutSection #Abt1 h3 {
+    font-size: 3em;
+    color: #eee839f5;
+    font-weight: bolder;
+}
+
+#AboutSection #Abt2 h3 {
+    font-size: 3em;
+    color: rgb(0, 255, 255);
+    font-weight: bolder;
+}
+
+#AboutSection #Abt3 h3 {
+    font-size: 3em;
+    color: rgb(0, 255, 26);
+    font-weight: bolder;
+}
+
+#AboutSection p {
+    font-size: 1.2em;
+    color: #fffffff5;
+    font-weight: lighter;
+    text-align: justify;
+}
+
+
+/* FAQ Section styles  */
+#FaqSection {
+    text-align: center;
+    background-color: #000000;
+    margin: auto;
+    width: 70%;
+    border: 2px solid snow;
+    border-radius: 3ch;
+    box-shadow: 2px 2px 10px #ffffff;
+    margin-top: 20%;
+    height: fit-content;
+    overflow: hidden;
+    margin-bottom: 15vh;
+}
+
+#FaqSection h1 {
+    font-size: 3em;
+    margin-top: 5px;
+}
+
+#FaqImg {
+    width: 50%;
+    height: auto;
+}
+
+.faqQuestions {
+    padding-left: 2%;
+    padding-right: 2%;
+    text-align: left;
+}
+
+#FaqContent {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.FaqMoreBtn button {
+    margin: 0%;
+    background-color: rgb(65, 65, 65);
+    font-size: large;
+    border-radius: 10px;
+}
+
+.FaqMoreBtn button:hover {
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(27, 2, 2);
+    font-size: large;
+}
+
+
+
+/* Footer/Contact Section styles  */
+#ContactSection {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-info,
+.social-icons {
+    flex: 1;
+}
+
+h2 {
+    color: #b43ce0;
+}
+
+p {
+    margin: 5px 0;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+}
+
+.copyright {
+    margin-top: 20px;
+}
+
+
+
+/* of page2 only */
+.navbar #SurvBtn {
+    background-color: #eff8f5;
+    color: #5f0282;
+}
+
+.areaselction {
+    top: 10vh;
+    margin-bottom: 5%;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: inset 0em 0em 0.5em 0.1em purple;
+    border: none;
+    height: 50vh;
+    overflow-y: auto;
+}
+
+.containerPg2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 2%;
+}
+
+.btnSelectArea {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 23%;
+    margin: auto;
+}
+
+#titleOfsecAreaSelec,
+#searchInput {
+    display: inline-block;
+}
+
+#searchInput {
+    width: fit-content;
+    position: sticky;
+    margin-top: 1vh;
+    margin-right: 1vw;
+    font-size: 3vh;
+    background-color: rgba(217, 155, 244, 0.685);
+    border: 2px solid #b43ce0;
+    border-radius: 5px;
+    outline: #b43ce0;
+}
+
+#searchInput::placeholder {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 3vh;
+    color: rgb(116, 22, 147);
+    background-image: url("images/search.png");
+    background-size: 1.5vw 3vh;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+#searchInput:hover {
+    background-color: #ddd;
+    color: #888;
+}
+
+hr {
+    position: relative;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+    width: 86%;
+    height: 3px;
+    background-color: #888;
+    border-radius: 50px;
+}
+
+/* detailed view section */
+#tableDisplay {
+    margin-top: 5px;
+    text-align: center;
+    width: 70%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+td {
+    background-color: rgba(117, 212, 229, 0.8);
+    color: #000;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+
+.detailView {
+    width: 97%;
+    margin-bottom: 5%;
+}
+
+#titleDtail {
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+}
