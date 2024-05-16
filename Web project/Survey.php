@@ -9,6 +9,18 @@ if (!isset($_SESSION['user_id'])) {
 
 // Fetch additional user details from the database using the user_id
 $user_id = $_SESSION['user_id'];
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "surveydata";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,21 +71,10 @@ $user_id = $_SESSION['user_id'];
 
     <!-- section to select the area -->
     <section class="areaselction">
-        <h2 id="titleOfsecAreaSelec">Select the area:</h2>
+        <h2 id="titleOfsecAreaSelec">Select the area:</h2><br>
         <input type="text" id="searchInput" oninput="filterButtons()" placeholder="Search by Name... ">
         <div class="containerPg2" id="buttonContainer">
             <?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "surveydata";
-
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
             $sql = "SELECT DISTINCT `Area` FROM `surveydtails`";
             $result = $conn->query($sql);
 

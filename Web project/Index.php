@@ -3,14 +3,7 @@
 <?php
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "surveydata";
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include "connection.php";
 
 $NextPg = "Survey.php";
 $user_id = null;
@@ -37,12 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>
             alert('Incorrect Password');
             </script>";
+           
             $errorMessage = "Incorrect password. Please try again.";
         }
     } else {
         echo "<script>
             alert('Incorrect User Name');
             </script>";
+            echo "<style>
+            .modal {display: block;}
+            </style>";
         $errorMessage = "Incorrect User Name. Please try again.";
     }
 }
@@ -168,58 +165,30 @@ if (isset($_SESSION['user_id'])) {
 
 
     <section id="FaqSection">
-        <div id="FaqContent">
-            <div><img src="Images/faq.png" alt="FaQ" id="FaqImg">
-            </div>
-            <div class="faqQuestions">
-                <div></div>
-                <h3>1. What service are you providing?</h3>
-                <p>
-                    We provide the servay details of the banking and non banking people in different areas o fthe
-                    country.
-                </p>
-                <hr>
-                <h3>2. What service are you providing?</h3>
-                <p>
-                    We provide the servay details of the banking and non banking people in different areas o fthe
-                    country.
-                </p>
-                <hr>
-                <h3>3. What service are you providing?</h3>
-                <p>
-                    We provide the servay details of the banking and non banking people in different areas o fthe
-                    country.
-                </p>
-                <hr>
-                <h3>4. What service are you providing?</h3>
-                <p>
-                    We provide the servay details of the banking and non banking people in different areas o fthe
-                    country.
-                </p>
-                <hr>
-                <h3>5. What service are you providing?</h3>
-                <p>
-                    We provide the servay details of the banking and non banking people in different areas o fthe
-                    country.
-                </p>
-                <hr>
-                <h3>6. What service are you providing?</h3>
-                <p>
-                    We provide the servay details of the banking and non banking people in different areas o fthe
-                    country.
-                </p>
-                <hr>
-                <h3>7. What service are you providing?</h3>
-                <p>
-                    We provide the servay details of the banking and non banking people in different areas o fthe
-                    country.
-                </p>
-                <hr>
-            </div>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">What is Lorem Ipsum?</div>
+            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
         </div>
-        <div class="FaqMoreBtn">
-            <button id="btnClickMore">More &#x2193; </button>
+        <div class="faq-answer">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         </div>
+        <div class="faq-item">
+            <div class="faq-question">Why do we use it?</div>
+            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="faq-answer">
+            <p>To fill the blank elements on the page.</p>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Where can I get some?</div>
+            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="faq-answer">
+            <p>There are many variations of passages of Lorem Ipsum available, but i use lipsum.com.</p>
+        </div>
+    </div>
+        
     </section>
 
     <footer id="ContactSection">
@@ -245,6 +214,7 @@ if (isset($_SESSION['user_id'])) {
             <p>This is a design for a college project work of St. Mary's College. Not to be used for any commertial purpose</p>
         </div>
     </footer>
+    <h3 class="FormLabel" id="LoginFormLabel" >Log-in</h3>
 
 
     <!-- Container for logout button -->
@@ -253,10 +223,12 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
 
-    <!--login sheet-->
+    
     <div id="id01" class="modal">
-        <form id="loginForm" class="modal-content animate" action="index.php" method="post">
+        <!--login sheet-->
+        <form id="loginForm" class="modal-content animate" action="index.php" method="post" >
             <div class="container">
+                <h3 class="FormLabel" id="LoginFormLabel" >Log-in</h3>
                 <img src="Images\b233c1612a5f8e1ce5500c3bd4c66fbe.jpg" alt="Login Sheet">
 
                 <input class="loInput" type="text" placeholder=" " name="uname" required onclick="clickIn()">
@@ -273,13 +245,53 @@ if (isset($_SESSION['user_id'])) {
 
                 <button id="LogSubmit" type="submit">Login</button>
                 <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                     <input type="checkbox" checked="checked" name="remember" style="width: fit-content; margin:2px;">Remember me
+                </label>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                
+                <span class="psw">New User? <button type="button" onclick="document.getElementById('registerForm').style.display='block';document.getElementById('loginForm').style.display='none';" class="cancelbtn">Register</button></span>
+            </div>
+        </form>
+
+        <!--registration sheet-->
+        <form id="registerForm" class="modal-content animate" action="index.php" method="post"style="display: none;">
+            <div class="container">
+                <h3 class="FormLabel" id="RegFormLabel" >Registration</h3>
+                <img src="Images\b233c1612a5f8e1ce5500c3bd4c66fbe.jpg" alt="Login Sheet">
+
+                <input class="loInput" type="text" placeholder="" name="RigFname" required onclick="clickIn()">
+                <label class="logLab" for="RigFname" id="useed"><b>First Name</b></label>
+
+                <input class="loInput" type="text" placeholder=" " name="RigMname" required onclick="clickIn()">
+                <label class="logLab" for="RigMname" id="useed"><b>Middle Name</b></label>
+                
+                <input class="loInput" type="text" placeholder=" " name="RigLname" required onclick="clickIn()">
+                <label class="logLab" for="RigLname" id="useed"><b>Last Name</b></label>
+
+                <input class="loInput" type="text" placeholder=" " name="uname" required onclick="clickIn()">
+                <label class="logLab" for="uname" id="useed"><b>Username</b></label>
+                <span class="error" id="uname-error"></span>
+
+                <input class="loInput" type="password" placeholder=" " name="psw" required id="passWd" onclick="clickIn()">
+                <label class="logLab" for="psw" id="pass"><b>Password</b></label>
+
+                <input class="loInput" type="password" placeholder=" " name="Cpsw" required id="CpassWd" onclick="clickIn()">
+                <label class="logLab" for="psw" id="Cpass"><b>Conform Password</b></label>
+                <button type="button" id="togglePasswordofCp" onclick="togglePasswordField()">Show Password</button>
+
+                <button id="RegSubmit" type="submit">Register</button>
+                <label>
+                     <input type="checkbox" checked="checked" name="remember" style="width: fit-content; margin:2px;">Remember me
                 </label>
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
+                <span class="psw">Already Registerd? <button type="button" onclick="document.getElementById('registerForm').style.display='none';document.getElementById('loginForm').style.display='block';" class="cancelbtn">Log in</button></span>
             </div>
         </form>
     </div>
@@ -301,9 +313,10 @@ if (isset($_SESSION['user_id'])) {
 
     //show password
     function togglePasswordField() {
-        const passwordField = document.getElementById("passWd");
+        var checker=document.getElementById("loginForm");
+        const passwordField =  checker.style.display == "none"?document.getElementById("CpassWd"):document.getElementById("passWd");
         var p1 = passwordField.textContent;
-        const togglePasswordButton = document.getElementById("togglePassword");
+        const togglePasswordButton = checker.style.display == "none"?document.getElementById("togglePasswordofCp"):document.getElementById("togglePassword");
         if (passwordField.type == "password") {
             passwordField.type = "text";
             passwordField.textContent = "";
@@ -341,6 +354,37 @@ if (isset($_SESSION['user_id'])) {
         xmlhttp.open("GET", "logout.php", true);
         xmlhttp.send();
     }
+
+
+    //FAQ Section working
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach((item) => {
+        const question = item.querySelector(".faq-question");
+        const answer = item.nextElementSibling;
+        const icon = item.querySelector("i");
+
+        item.addEventListener("click", () => {
+            faqItems.forEach((otherItem) => {
+                if (otherItem !== item) {
+                    const otherAnswer = otherItem.nextElementSibling;
+                    const otherIcon = otherItem.querySelector("i");
+
+                    otherAnswer.classList.remove("active");
+                    otherIcon.classList.remove("active");
+                    otherAnswer.style.maxHeight = "0";
+                }
+            });
+
+            answer.classList.toggle("active");
+            icon.classList.toggle("active");
+            if (answer.classList.contains("active")) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } else {
+                answer.style.maxHeight = "0";
+            }
+        });
+    });
 
     // smooth scrool
     document.querySelectorAll('a').forEach(anchor => {
@@ -415,30 +459,6 @@ if (isset($_SESSION['user_id'])) {
     }
 
     setInterval(changeImage, 5000);
-
-    //change the height of the Faq on click
-    const faqCon = document.getElementById("FaqContent");
-    const btnMore = document.getElementById("btnClickMore");
-    var flg = 0;
-
-    btnMore.addEventListener("click", function() {
-        if (flg === 0) {
-            flg = 1;
-            faqCon.style.maxHeight = "none";
-            btnMore.innerHTML = "show less &#x2191";
-        } else {
-            flg = 0;
-            faqCon.style.maxHeight = "";
-            btnMore.innerHTML = "More &#x2193";
-        }
-    });
-
-    const cl = document.getElementsByClassName("loInput");
-    const ermsg = document.getElementById("ErrMsg");
-
-    function clickIn() {
-        ermsg.style.display = "none";
-    }
 </script>
 
 </html>
