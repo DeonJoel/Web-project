@@ -2,25 +2,48 @@
 <html lang="en">
 <?php
 session_start();
-if (isset($_SESSION['user_type'])) {
-    $userType = $_SESSION['user_type'];
-}
 
 include "connection.php";
 
 $NextPg = "Survey.php";
 $user_id = null;
 
-include "login.php";
-// Check if the user is logged in
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_type'])) {
-    $user_id = $_SESSION['user_id'];
-    $userType = $_SESSION['user_type'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user = $_POST["uname"];
+    $pass = $_POST["psw"];
 
+    $sql = "SELECT * FROM users WHERE UserName = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $user);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $storedPassword = $row['Password'];
+
+        if ($pass == $storedPassword) {
+            $_SESSION['user_id'] = $user; // Store user ID or other relevant information
+            header("Location: " . $NextPg);
+            exit();
+        } else {
+            echo "<script>
+            alert('Incorrect Password');
+            </script>";
+            $errorMessage = "Incorrect password. Please try again.";
+        }
+    } else {
+        echo "<script>
+            alert('Incorrect User Name');
+            </script>";
+        $errorMessage = "Incorrect User Name. Please try again.";
+    }
 }
 
-
-include "register.php";
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+}
 ?>
 
 <head>
@@ -46,11 +69,11 @@ include "register.php";
                     <li><a href="#HomeSection" id="homeSec">Home</a></li>
                     <li><a href="#AboutSection" id="AboutSec">About</a></li>
                     <li><a href="#FaqSection" id="FaqSec">FaQ</a></li>
-                    <li><a href="#ContactSection" id="ContactSec">Contact Us</a></li>
                     <li><a onclick="login()">Survey Details</a></li>
-                    <li id="log"><a id="logDetail" onclick="toggleLogoutContainer()">
+                    <li><a href="#ContactSection" id="ContactSec">Contact Us</a></li>
+                    <li><a id="logDetail" onclick="toggleLogoutContainer()">
                             <?php if (isset($user_id)) : ?>
-                                Welcome, <?php echo $user_id; ?><img src="Images/user.png" alt="" id="UserIcon" style="filter: invert(100%);">
+                                Welcome, <?php echo $user_id; ?>
                             <?php endif; ?>
                         </a>
                     </li>
@@ -78,11 +101,11 @@ include "register.php";
     <!-- marquee type image -->
     <div class="marImg">
         <div class="carousel">
-            <img src="Images/1.jpeg" alt="Image 1">
-            <img src="Images/2.jpeg" alt="Image 2">
-            <img src="Images/3.jpeg" alt="Image 3">
-            <img src="Images/4.jpeg" alt="Image 2">
-            <img src="Images/5.jpeg" alt="Image 3">
+            <img src="Images/1.jpg" alt="Image 1">
+            <img src="Images/2.jpg" alt="Image 2">
+            <img src="Images/3.jpg" alt="Image 3">
+            <img src="Images/4.jpg" alt="Image 2">
+            <img src="Images/5.jpg" alt="Image 3">
         </div>
     </div>
 
@@ -138,30 +161,58 @@ include "register.php";
 
 
     <section id="FaqSection">
-    <div class="faq-container">
-        <div class="faq-item">
-            <div class="faq-question">What is Lorem Ipsum?</div>
-            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
+        <div id="FaqContent">
+            <div><img src="Images/faq.png" alt="FaQ" id="FaqImg">
+            </div>
+            <div class="faqQuestions">
+                <div></div>
+                <h3>1. What service are you providing?</h3>
+                <p>
+                    We provide the servay details of the banking and non banking people in different areas o fthe
+                    country.
+                </p>
+                <hr>
+                <h3>1. What service are you providing?</h3>
+                <p>
+                    We provide the servay details of the banking and non banking people in different areas o fthe
+                    country.
+                </p>
+                <hr>
+                <h3>1. What service are you providing?</h3>
+                <p>
+                    We provide the servay details of the banking and non banking people in different areas o fthe
+                    country.
+                </p>
+                <hr>
+                <h3>1. What service are you providing?</h3>
+                <p>
+                    We provide the servay details of the banking and non banking people in different areas o fthe
+                    country.
+                </p>
+                <hr>
+                <h3>1. What service are you providing?</h3>
+                <p>
+                    We provide the servay details of the banking and non banking people in different areas o fthe
+                    country.
+                </p>
+                <hr>
+                <h3>1. What service are you providing?</h3>
+                <p>
+                    We provide the servay details of the banking and non banking people in different areas o fthe
+                    country.
+                </p>
+                <hr>
+                <h3>1. What service are you providing?</h3>
+                <p>
+                    We provide the servay details of the banking and non banking people in different areas o fthe
+                    country.
+                </p>
+                <hr>
+            </div>
         </div>
-        <div class="faq-answer">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <div class="FaqMoreBtn">
+            <button id="btnClickMore">More &#x2193; </button>
         </div>
-        <div class="faq-item">
-            <div class="faq-question">Why do we use it?</div>
-            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="faq-answer">
-            <p>To fill the blank elements on the page.</p>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Where can I get some?</div>
-            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="faq-answer">
-            <p>There are many variations of passages of Lorem Ipsum available, but i use lipsum.com.</p>
-        </div>
-    </div>
-        
     </section>
 
     <footer id="ContactSection">
@@ -173,10 +224,10 @@ include "register.php";
                 <p>Address: 123 Main Street, Cityville</p>
             </div>
             <div class="social-icons">
-                <h2>Follow Us on</h2>
-                <a href="#" target="_blank"><img src="Images/facebook-icon.png" alt="Facebook"></a>
-                <a href="#" target="_blank"><img src="Images/twitter-icon.png" alt="Twitter"></a>
-                <a href="#" target="_blank"><img src="Images/instagram-icon.png" alt="Instagram"></a>
+                <h2>Follow Us</h2>
+                <a href="#" target="_blank"><img src="path/to/facebook-icon.png" alt="Facebook"></a>
+                <a href="#" target="_blank"><img src="path/to/twitter-icon.png" alt="Twitter"></a>
+                <a href="#" target="_blank"><img src="path/to/instagram-icon.png" alt="Instagram"></a>
             </div>
         </div>
         <div class="copyright">
@@ -187,25 +238,18 @@ include "register.php";
             <p>This is a design for a college project work of St. Mary's College. Not to be used for any commertial purpose</p>
         </div>
     </footer>
-    <h3 class="FormLabel" id="LoginFormLabel" >Log-in</h3>
 
 
     <!-- Container for logout button -->
     <div class="logCont" id="logoutContainer" style="display: none;">
-        <?php
-        if($userType=='S'){
-            echo "<button onclick='navigateToSurveyorPage()'>Surveyor Page</button>";
-        }?>
         <button onclick="logout()">Logout</button>
     </div>
 
 
-    
-    <div id="id01" class="modal" <?php if(isset($errorMessage)){ echo "style=display:block;";} ?>>
-        <!--login sheet-->
-        <form id="loginForm" class="modal-content animate" action="index.php" method="post" >
+    <!--login sheet-->
+    <div id="id01" class="modal">
+        <form id="loginForm" class="modal-content animate" action="index.php" method="post">
             <div class="container">
-                <h3 class="FormLabel" id="LoginFormLabel" >Log-in</h3>
                 <img src="Images\b233c1612a5f8e1ce5500c3bd4c66fbe.jpg" alt="Login Sheet">
 
                 <input class="loInput" type="text" placeholder=" " name="uname" required onclick="clickIn()">
@@ -220,60 +264,15 @@ include "register.php";
                     <p id="ErrMsg" style="color: red;"><?php echo $errorMessage; ?></p>
                 <?php endif; ?>
 
-                <button id="LogSubmit" type="submit" name="login">Login</button>
+                <button id="LogSubmit" type="submit">Login</button>
                 <label>
-                     <input type="checkbox" checked="checked" name="remember" style="width: fit-content; margin:2px;">Remember me
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
+            </div>
 
-                <label>
-                     <input type="checkbox"  name="surveior" style="width: fit-content; margin:2px;">I Am Surveyor
-                </label>
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
                 <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-
-            <div class="container belowCont" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                
-                <div class="psw">New User? <button type="button" onclick="document.getElementById('registerForm').style.display='block';document.getElementById('loginForm').style.display='none';" class="cancelbtn">Register</button></div>
-            </div>
-        </form>
-
-        <!--registration sheet-->
-        <form id="registerForm" class="modal-content animate" action="index.php" method="post"style="display: none;">
-            <div class="container">
-                <h3 class="FormLabel" id="RegFormLabel" >Registration</h3>
-                <img src="Images\b233c1612a5f8e1ce5500c3bd4c66fbe.jpg" alt="Login Sheet">
-
-                <input class="loInput" type="text" placeholder="" name="RigFname" required onclick="clickIn()">
-                <label class="logLab" for="RigFname" id="useed"><b>First Name</b></label>
-
-                <input class="loInput" type="text" placeholder=" " name="RigMname" onclick="clickIn()">
-                <label class="logLab" for="RigMname" id="useed"><b>Middle Name</b></label>
-                
-                <input class="loInput" type="text" placeholder=" " name="RigLname" required onclick="clickIn()">
-                <label class="logLab" for="RigLname" id="useed"><b>Last Name</b></label>
-
-                <input class="loInput" type="text" placeholder=" " name="uname" required onclick="clickIn()">
-                <label class="logLab" for="uname" id="useed"><b>Username</b></label>
-                <span class="error" id="uname-error"></span>
-
-                <input class="loInput" type="password" placeholder=" " name="Rpsw" required id="passWd" onclick="clickIn()">
-                <label class="logLab" for="psw" id="pass"><b>Password</b></label>
-
-                <input class="loInput" type="password" placeholder=" " name="Cpsw" required id="CpassWd" onclick="clickIn()">
-                <label class="logLab" for="psw" id="Cpass"><b>Conform Password</b></label>
-                <span class="error" id="password-error"></span>
-                <button type="button" id="togglePasswordofCp" onclick="togglePasswordField()">Show Password</button>
-
-                <button id="RegSubmit" type="submit" name="register" onclick="checkPass()">Register</button>
-                <label>
-                     <input type="checkbox" checked="checked" name="remember" style="width: fit-content; margin:2px;">Remember me
-                </label>
-            </div>
-
-            <div class="container belowCont" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <div class="psw">Already Registerd? <button type="button" onclick="document.getElementById('registerForm').style.display='none';document.getElementById('loginForm').style.display='block';" class="cancelbtn">Log in</button></div>
             </div>
         </form>
     </div>
@@ -291,41 +290,11 @@ include "register.php";
             modal.style.display = "none";
         }
     }
-
-    //go to SurveyorPage
-    function navigateToSurveyorPage() {
-            window.location.href = 'SurveyorPage.php';
-        }
-
-//conform password in register
-function checkPass(){
-    const password = document.getElementById('passWd');
-    const confirmPassword = document.getElementById('CpassWd');
-    const passwordError = document.getElementById('password-error');
-    const submitButton = document.getElementById('RegSubmit');
-
-    function validatePassword() {
-        if (password.value !== confirmPassword.value) {
-            passwordError.textContent = "Passwords do not match.";
-            passwordError.style.color = "red";
-            submitButton.disabled = true;
-        } else {
-            passwordError.textContent = "Passwords Matched";
-            passwordError.style.color = "green";
-            submitButton.disabled = false;
-            
-        }
-    }
-}
-
-
-
     //show password
     function togglePasswordField() {
-        var checker=document.getElementById("loginForm");
-        const passwordField =  checker.style.display == "none"?document.getElementById("CpassWd"):document.getElementById("passWd");
+        const passwordField = document.getElementById("passWd");
         var p1 = passwordField.textContent;
-        const togglePasswordButton = checker.style.display == "none"?document.getElementById("togglePasswordofCp"):document.getElementById("togglePassword");
+        const togglePasswordButton = document.getElementById("togglePassword");
         if (passwordField.type == "password") {
             passwordField.type = "text";
             passwordField.textContent = "";
@@ -363,37 +332,6 @@ function checkPass(){
         xmlhttp.open("GET", "logout.php", true);
         xmlhttp.send();
     }
-
-
-    //FAQ Section working
-    const faqItems = document.querySelectorAll(".faq-item");
-
-    faqItems.forEach((item) => {
-        const question = item.querySelector(".faq-question");
-        const answer = item.nextElementSibling;
-        const icon = item.querySelector("i");
-
-        item.addEventListener("click", () => {
-            faqItems.forEach((otherItem) => {
-                if (otherItem !== item) {
-                    const otherAnswer = otherItem.nextElementSibling;
-                    const otherIcon = otherItem.querySelector("i");
-
-                    otherAnswer.classList.remove("active");
-                    otherIcon.classList.remove("active");
-                    otherAnswer.style.maxHeight = "0";
-                }
-            });
-
-            answer.classList.toggle("active");
-            icon.classList.toggle("active");
-            if (answer.classList.contains("active")) {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-            } else {
-                answer.style.maxHeight = "0";
-            }
-        });
-    });
 
     // smooth scrool
     document.querySelectorAll('a').forEach(anchor => {
@@ -468,6 +406,30 @@ function checkPass(){
     }
 
     setInterval(changeImage, 5000);
+
+    //change the height of the Faq on click
+    const faqCon = document.getElementById("FaqContent");
+    const btnMore = document.getElementById("btnClickMore");
+    var flg = 0;
+
+    btnMore.addEventListener("click", function() {
+        if (flg === 0) {
+            flg = 1;
+            faqCon.style.maxHeight = "none";
+            btnMore.innerHTML = "show less &#x2191";
+        } else {
+            flg = 0;
+            faqCon.style.maxHeight = "";
+            btnMore.innerHTML = "More &#x2193";
+        }
+    });
+
+    const cl = document.getElementsByClassName("loInput");
+    const ermsg = document.getElementById("ErrMsg");
+
+    function clickIn() {
+        ermsg.style.display = "none";
+    }
 </script>
 
 </html>
