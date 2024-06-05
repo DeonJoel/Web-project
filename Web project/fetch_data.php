@@ -1,15 +1,5 @@
 <?php
-// Your database connection code here
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "surveydata";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include "connection.php";
 
 // Get the button name from the GET request
 if (isset($_GET['button'])) {

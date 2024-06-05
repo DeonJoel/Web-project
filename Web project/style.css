@@ -197,17 +197,6 @@ cursor: pointer;
     margin-top: -15px;
 }
 
-.logCont {
-    width: 20%;
-    display: block;
-    position: fixed;
-    height: 70%;
-    background-color: white;
-    top: 15vh;
-    right: 0;
-    z-index: 2;
-}
-
 #UserIcon {
     height: 50px;
     width: auto;
@@ -316,7 +305,7 @@ Section {
     top: 10px;
     width: 75%;
     margin: auto;
-    border: #6f0ecf 3.3px solid;
+    /* border: #6f0ecf 3.3px solid; */
     border-radius: 10px;
 }
 
@@ -385,7 +374,7 @@ Section {
 #Abt3 {
     background-color: rgba(45, 36, 171, 0.689);
     border-radius: 0 50px 50px 0;
-    border: #b43ce0 10px solid;
+    border: #b43ce0 5px solid;
     border-right: #9606adf5 4px solid;
     border-left: none;
     outline: none;
@@ -444,7 +433,7 @@ Section {
 /* FAQ Section styles  */
 #FaqSection {
     font-family: 'Montserrat', sans-serif;
-    margin: 0;
+    margin: 2% 0 10% 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -551,6 +540,21 @@ p {
     margin-top: 20px;
 }
 
+
+/* logout container */
+.logCont {
+    width: 20%;
+    display: block;
+    position: fixed;
+    height: 70%;
+    background-color: white;
+    border-bottom: #5f0282 5px solid;
+    border-left: #5f0282 5px solid;
+    border-top:#5f0282 5px solid;
+    top: 15vh;
+    right: 0;
+    z-index: 2;
+}
 
 
 /* of page2 only */

@@ -187,7 +187,6 @@ include "register.php";
             <p>This is a design for a college project work of St. Mary's College. Not to be used for any commertial purpose</p>
         </div>
     </footer>
-    <h3 class="FormLabel" id="LoginFormLabel" >Log-in</h3>
 
 
     <!-- Container for logout button -->

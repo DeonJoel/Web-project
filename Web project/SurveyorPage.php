@@ -108,8 +108,7 @@ $result = $conn->query("SELECT * FROM surveydtails");
                     <li><a id="SurvBtn">Survey Details</a></li>
                     <li id="log"><a id="logDetail" onclick="toggleLogoutContainer()">
                             <?php if (isset($user_id)) : ?>
-                            Welcome,
-                            <?php echo $user_id; ?>
+                                Welcome, <?php echo $user_id; ?><img src="Images/user.png" alt="" id="UserIcon" style="filter: invert(100%);">
                             <?php endif; ?>
                         </a>
                     </li>
