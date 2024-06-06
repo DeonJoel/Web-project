@@ -34,7 +34,7 @@
                 $errorMessage = "Incorrect User Name. Please try again.";
             }
         }
-        else {
+        else if($_SERVER["REQUEST_METHOD"] == "POST"){
             $sql = "SELECT * FROM users WHERE UserName = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $user);
@@ -46,7 +46,8 @@
                 $storedPassword = $row['Password'];
         
                 if ($pass == $storedPassword) {
-                    $_SESSION['user_id'] = $user; // Store user ID or other relevant information
+                    $_SESSION['user_id'] = $user; 
+                    $_SESSION['user_type'] = 'U';
                     header("Location: " . $NextPg);
                     exit();
                 } else {

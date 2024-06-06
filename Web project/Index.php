@@ -28,6 +28,7 @@ include "register.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Images\logo.png" type="image/png">
 </head>
 
 <body>
@@ -36,6 +37,7 @@ include "register.php";
     <header class="headM">
         <div id="main_head">
             <h1 id="main_heading_text">
+                <img src="Images\logo.png" alt="" style="width: 3%;background-color:#f1f1f1">
                 Rural Bank Accounting Survey
             </h1>
             <h6 id="main_heading_abr">(RuBAS)</h6>
@@ -137,30 +139,41 @@ include "register.php";
     </section>
 
 
-    <section id="FaqSection">
-    <div class="faq-container">
-        <div class="faq-item">
-            <div class="faq-question">What is Lorem Ipsum?</div>
-            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="faq-answer">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Why do we use it?</div>
-            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="faq-answer">
-            <p>To fill the blank elements on the page.</p>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Where can I get some?</div>
-            <div class="icon-container"><i class="fas fa-chevron-right"></i></div>
-        </div>
-        <div class="faq-answer">
-            <p>There are many variations of passages of Lorem Ipsum available, but i use lipsum.com.</p>
-        </div>
+    <section id="FaqSection" style="background-color: none;">
+        <div class="faq-container">
+            <img src="Images\faq.png" alt="FAQ" style="margin:0 20%  0 20%;">
+            <?php
+            $sql = "SELECT * FROM faq WHERE status = 'A' AND approval = 'approved'";
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<div class='faq-item'>
+                            <div class='faq-question'>{$row['question']}</div>
+                            <div class='icon-container'><i class='fas fa-chevron-right'></i></div>
+                          </div>
+                          <div class='faq-answer'>
+                            <p>{$row['answer']}</p>
+                          </div>";
+                }
+            } else {
+                echo "<p>No FAQs available at the moment.</p>";
+            }
+
+            
+
+            $conn->close();
+            ?>
+            <br><br><br>
+            <div style="width: fit-content;margin:auto">
+        <h3 style="margin:auto;width:fit-content;color:blueviolet;">Ask a Question</h3>
+    <form action="submit_question.php" method="POST">
+        <label for="question" style="color: blueviolet;">Your Question:</label><br>
+        <textarea id="question" name="question" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
     </div>
+        </div>
         
     </section>
 
@@ -365,6 +378,7 @@ function checkPass(){
 
 
     //FAQ Section working
+    document.addEventListener('DOMContentLoaded', () => {
     const faqItems = document.querySelectorAll(".faq-item");
 
     faqItems.forEach((item) => {
@@ -393,6 +407,7 @@ function checkPass(){
             }
         });
     });
+});
 
     // smooth scrool
     document.querySelectorAll('a').forEach(anchor => {

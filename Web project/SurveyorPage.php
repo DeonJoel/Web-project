@@ -87,6 +87,7 @@ $result = $conn->query("SELECT * FROM surveydtails");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surveyor Page</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Images\logo.png" type="image/png">
 </head>
 
 <body>
@@ -97,6 +98,7 @@ $result = $conn->query("SELECT * FROM surveydtails");
     <header class="headM">
         <div id="main_head">
             <h1 id="main_heading_text">
+            <img src="Images\logo.png" alt="" style="width: 3%;background-color:#f1f1f1">
                 Rural Bank Accounting Survey
             </h1>
             <h6 id="main_heading_abr">(RuBAS)</h6>
